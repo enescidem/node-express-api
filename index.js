@@ -1,7 +1,6 @@
 const express = require("express")
 const dotenv = require("dotenv")
 dotenv.config()
-
 const productRoutes = require("./src/ProductRoutes")
 
 const port = process.env.SERVER_PORT
@@ -14,5 +13,5 @@ app.use(express.urlencoded({ extended: false }))
 app.use("/api/product",productRoutes.routes)
 
 app.listen(port, () => {
-    console.log(`The server is running on ${port}`)
+    console.log(`The server is running on port ${port}`)
 })
