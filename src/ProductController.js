@@ -44,7 +44,7 @@ const getById = async(req, res) => {
     }
 }
 
-const updateById = async() => {
+const updateById = async(req, res) => {
     try {
         let id = req.params.id
         let { productName, price } = req.body
@@ -58,7 +58,18 @@ const updateById = async() => {
     }
 }
 
-const deleteById = async() => {}
+const deleteById = async(req, res) => {
+        try {
+        let id = req.params.id
+        const connection = await getConnection()
+        const sqlQuery = "CALL deleteProductByIdSP (?)"
+        const response = await connection.query(sqlQuery, [id])
+        const result = response[0][0].result
+        res.send(result)
+    } catch (error) {
+        console.log("Server Error", error)
+    }
+}
 
 
 
